@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import DeleteIcon from "@mui/icons-material/Delete";
+import UpdateIcon from "@mui/icons-material/Update";
 import {
   Paper,
   Container,
@@ -8,6 +10,7 @@ import {
   Typography,
   Input,
   backdropClasses,
+  Button,
 } from "@mui/material";
 
 function ShowPosts() {
@@ -42,6 +45,8 @@ function ShowPosts() {
         // marginRight: "120px",
         padding: "20px",
         // border: "12px solid pink",
+        overflowY: "scroll",
+        scrollbarWidth: "none",
       }}
     >
       <Typography
@@ -56,58 +61,68 @@ function ShowPosts() {
         style={{
           display: "flex",
           flexDirection: "column",
+          justifyContent: "left",
+          //   alignItems: "left",
           width: "100%",
           marginTop: "10px",
         }}
       >
         {SMdata &&
-          SMdata.map((result) => (
+          SMdata.map((result, index) => (
             <>
               <Box
                 key={result.id}
                 width="100%" // Ensure the Box spans the full width of its container
                 maxWidth="800px" // Limit the maximum width for better readability
-                marginBottom="20px" // Add spacing between posts
+                marginBottom="40px" // Add spacing between posts
                 style={{
                   display: "flex",
                   flexDirection: "column",
                   justifyContent: "center",
                   background:
-                    "linear-gradient(to bottom right, #a0d2eb, #e5eaf5, #d0bdf4, #8458B3, #a28089)",
+                    "linear-gradient(to bottom right #51d0de,#bf4aa8,#d9d9d9)",
                 }}
               >
-                <Paper
-                  elevation={10}
-                  style={{
-                    boxSizing: "border-box", // Ensures padding and margin are included in the element's total width
-                    margin: "10px",
-                  }}
-                >
-                  <Typography
-                    variant="h5"
-                    fontSize="lg"
-                    fontFamily={"aesthetic"}
-                    style={{ textAlign: "left", fontWeight: "bold" }}
+                <div>
+                  <Paper
+                    elevation={10}
+                    style={{
+                      boxSizing: "border-box", // Ensures padding and margin are included in the element's total width
+                      margin: "10px",
+                    }}
                   >
-                    {result.postName}
-                  </Typography>
-                </Paper>
-                <Paper
-                  elevation={10}
-                  style={{
-                    boxSizing: "border-box", // Ensures padding and margin are included in the element's total width
-                    margin: "10px",
-                  }}
-                >
-                  <Typography
-                    variant="h5"
-                    fontSize="lg"
-                    fontFamily={"aesthetic"}
-                    style={{ textAlign: "left", fontWeight: "bold" }}
+                    <Typography
+                      variant="h5"
+                      fontSize="lg"
+                      fontFamily={"aesthetic"}
+                      style={{ textAlign: "left", fontWeight: "bold" }}
+                    >
+                      {result.postName}
+                    </Typography>
+                  </Paper>
+                  <Paper
+                    elevation={10}
+                    style={{
+                      boxSizing: "border-box", // Ensures padding and margin are included in the element's total width
+                      margin: "10px",
+                    }}
                   >
-                    {result.description}
-                  </Typography>
-                </Paper>
+                    <Typography
+                      variant="h5"
+                      fontSize="lg"
+                      fontFamily={"aesthetic"}
+                      style={{ textAlign: "left", fontWeight: "bold" }}
+                    >
+                      {result.description}
+                    </Typography>
+                  </Paper>
+                  <Button variant="contained" startIcon={<UpdateIcon />}>
+                    Update
+                  </Button>
+                  <Button variant="outlined" startIcon={<DeleteIcon />}>
+                    Delete
+                  </Button>
+                </div>
               </Box>
             </>
           ))}

@@ -12,7 +12,7 @@ function AddPost() {
           marginTop: "10px",
         }}
       >
-        <Input size="lg" variant="solid" />
+        {/* <Input size="lg" variant="solid" /> */}
       </div>{" "}
     </div>
   );

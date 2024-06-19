@@ -5,8 +5,11 @@ import {
   CssBaseline,
   Grid,
   Typography,
+  Button,
 } from "@mui/material";
 import ShowPosts from "./components/ShowPosts";
+import { Link } from "react-router-dom";
+import AddIcon from "@mui/icons-material/Add";
 
 function App() {
   return (
@@ -50,6 +53,11 @@ function App() {
           {/* Add additional content here */}
         </Paper>
         <ShowPosts />
+        <Link to="/addNewPost">
+          <Button variant="contained" startIcon={<AddIcon />}>
+            Create Post
+          </Button>
+        </Link>
       </div>
     </>
   );
