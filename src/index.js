@@ -4,8 +4,12 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import AddPost from "./components/AddPost";
 
-const router = createBrowserRouter([{ path: "/", element: <App /> }]);
+const router = createBrowserRouter([
+  { path: "/", element: <App /> },
+  { path: "/addNewPost", element: <AddPost /> },
+]);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
