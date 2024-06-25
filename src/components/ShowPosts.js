@@ -12,6 +12,7 @@ import {
   backdropClasses,
   Button,
 } from "@mui/material";
+import ShowpostContainer from "../styles/ShowpostContainer";
 
 function ShowPosts() {
   const [SMdata, setSMdata] = useState("");
@@ -30,33 +31,7 @@ function ShowPosts() {
   console.log("Show SM data", SMdata);
 
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "flex-start",
-        background:
-          "linear-gradient(to bottom right, #a0d2eb, #e5eaf5, #d0bdf4, #8458B3, #a28089)",
-        width: "90%",
-        height: "80%",
-        margin: "20px",
-        // marginLeft: "120px",
-        // marginRight: "120px",
-        padding: "20px",
-        // border: "12px solid pink",
-        overflowY: "scroll",
-        scrollbarWidth: "none",
-      }}
-    >
-      <Typography
-        level="h3"
-        variant="h4"
-        fontFamily={"aesthetic"}
-        style={{ fontWeight: "bold" }}
-      >
-        Show Posts
-      </Typography>
+    <ShowpostContainer title="Show Posts">
       <div
         style={{
           display: "flex",
@@ -79,17 +54,21 @@ function ShowPosts() {
                   display: "flex",
                   flexDirection: "column",
                   justifyContent: "center",
+                  background: "#044a48",
+                  // "linear-gradient(to bottom right #51d0de,#bf4aa8,#d9d9d9)",
+                }}
+                sx={{
+                  padding: "16px",
+                  marginTop: "16px",
                   background:
-                    "linear-gradient(to bottom right #51d0de,#bf4aa8,#d9d9d9)",
+                    "linear-gradient(to bottom right, #51d0de, #bf4aa8, #d9d9d9)",
+                  borderRadius: "8px",
                 }}
               >
                 <div>
                   <Paper
-                    elevation={10}
-                    style={{
-                      boxSizing: "border-box", // Ensures padding and margin are included in the element's total width
-                      margin: "10px",
-                    }}
+                    elevation={3}
+                    style={{ padding: "16px", marginTop: "16px" }}
                   >
                     <Typography
                       variant="h5"
@@ -101,11 +80,8 @@ function ShowPosts() {
                     </Typography>
                   </Paper>
                   <Paper
-                    elevation={10}
-                    style={{
-                      boxSizing: "border-box", // Ensures padding and margin are included in the element's total width
-                      margin: "10px",
-                    }}
+                    elevation={3}
+                    style={{ padding: "16px", marginTop: "16px" }}
                   >
                     <Typography
                       variant="h5"
@@ -116,18 +92,20 @@ function ShowPosts() {
                       {result.description}
                     </Typography>
                   </Paper>
-                  <Button variant="contained" startIcon={<UpdateIcon />}>
-                    Update
-                  </Button>
-                  <Button variant="outlined" startIcon={<DeleteIcon />}>
-                    Delete
-                  </Button>
+                  <div>
+                    <Button variant="contained" startIcon={<UpdateIcon />}>
+                      Update
+                    </Button>
+                    <Button variant="outlined" startIcon={<DeleteIcon />}>
+                      Delete
+                    </Button>
+                  </div>
                 </div>
               </Box>
             </>
           ))}
       </div>
-    </div>
+    </ShowpostContainer>
   );
 }
 
