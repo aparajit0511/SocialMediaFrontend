@@ -5,12 +5,14 @@ import { Button, TextField, Paper, Typography } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 import { useNavigate, Link } from "react-router-dom";
 import { SocialMediaData } from "../ContextAPI/SocialMediaContext";
+import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 
 function AddPost() {
   const { UpdatedData } = useContext(SocialMediaData);
   console.log("UpdatedData", UpdatedData);
-  const [postName, setpostName] = useState("");
-  const [description, setdescription] = useState("");
+
+  const [postName, setpostName] = useState(UpdatedData.postName);
+  const [description, setdescription] = useState(UpdatedData.description);
 
   const navigate = useNavigate();
 
@@ -28,13 +30,37 @@ function AddPost() {
     event.preventDefault();
 
     const socialMedia = { postName, description };
-    fetch("http://localhost:8080/socialmedia", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(socialMedia),
-    }).then(() => {
-      console.log("New Post added");
-    });
+
+    if (!UpdatedData) {
+      callPost();
+    } else {
+      callPut();
+    }
+
+    async function callPut() {
+      const _socialMedia = {
+        id: UpdatedData.id,
+        postName: postName,
+        description: description,
+      };
+      await fetch("http://localhost:8080/socialmedia", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(_socialMedia),
+      }).then(() => {
+        console.log("Updated Post");
+      });
+    }
+
+    async function callPost() {
+      await fetch("http://localhost:8080/socialmedia", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(socialMedia),
+      }).then(() => {
+        console.log("New Post added");
+      });
+    }
 
     setTimeout(() => {
       navigate(`/`);
@@ -58,6 +84,7 @@ function AddPost() {
               fullWidth
               margin="normal"
               onChange={onPostHandler}
+              defaultValue={postName}
             />
             <TextField
               label="Content"
@@ -66,6 +93,7 @@ function AddPost() {
               rows={4}
               margin="normal"
               onChange={onDescriptionHandler}
+              defaultValue={description}
             />
             <Button
               variant="contained"
@@ -77,7 +105,11 @@ function AddPost() {
               Send
             </Button>
             <Link to="/">
-              <Button variant="contained" color="secondary">
+              <Button
+                variant="contained"
+                color="secondary"
+                startIcon={<ArrowBackIosIcon />}
+              >
                 Go Back
               </Button>
             </Link>
