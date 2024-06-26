@@ -5,6 +5,7 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import AddPost from "./components/AddPost";
+import { SocialMediaContext } from "./ContextAPI/SocialMediaContext";
 
 const router = createBrowserRouter([
   { path: "/", element: <App /> },
@@ -14,7 +15,9 @@ const router = createBrowserRouter([
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <SocialMediaContext>
+      <RouterProvider router={router} />
+    </SocialMediaContext>
   </React.StrictMode>
 );
 

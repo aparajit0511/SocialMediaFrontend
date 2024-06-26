@@ -1,11 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import StyledContainer from "../styles/StyledContainer";
 import ShowpostContainer from "../styles/ShowpostContainer";
 import { Button, TextField, Paper, Typography } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+import { SocialMediaData } from "../ContextAPI/SocialMediaContext";
 
 function AddPost() {
+  const { UpdatedData } = useContext(SocialMediaData);
+  console.log("UpdatedData", UpdatedData);
   const [postName, setpostName] = useState("");
   const [description, setdescription] = useState("");
 
@@ -41,7 +44,6 @@ function AddPost() {
   return (
     <StyledContainer>
       <ShowpostContainer title="Add / Update Post">
-        AddPost
         <Paper
           elevation={3}
           style={{
@@ -74,6 +76,11 @@ function AddPost() {
             >
               Send
             </Button>
+            <Link to="/">
+              <Button variant="contained" color="secondary">
+                Go Back
+              </Button>
+            </Link>
           </form>
         </Paper>
       </ShowpostContainer>
