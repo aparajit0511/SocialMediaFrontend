@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import DeleteIcon from "@mui/icons-material/Delete";
 import UpdateIcon from "@mui/icons-material/Update";
 import {
@@ -13,9 +13,13 @@ import {
   Button,
 } from "@mui/material";
 import ShowpostContainer from "../styles/ShowpostContainer";
+import { Link } from "react-router-dom";
+import { SocialMediaData } from "../ContextAPI/SocialMediaContext";
 
 function ShowPosts() {
   const [SMdata, setSMdata] = useState("");
+
+  const { setUpdatedData } = useContext(SocialMediaData);
 
   useEffect(() => {
     async function callSMData() {
@@ -29,6 +33,11 @@ function ShowPosts() {
   }, []);
 
   console.log("Show SM data", SMdata);
+
+  const onUpdateHandler = (item) => {
+    console.log("On update click", item);
+    setUpdatedData(item);
+  };
 
   return (
     <ShowpostContainer title="Show Posts">
@@ -46,7 +55,7 @@ function ShowPosts() {
           SMdata.map((result, index) => (
             <>
               <Box
-                key={result.id}
+                key={index}
                 width="100%" // Ensure the Box spans the full width of its container
                 maxWidth="800px" // Limit the maximum width for better readability
                 marginBottom="40px" // Add spacing between posts
@@ -93,9 +102,16 @@ function ShowPosts() {
                     </Typography>
                   </Paper>
                   <div>
-                    <Button variant="contained" startIcon={<UpdateIcon />}>
-                      Update
-                    </Button>
+                    <Link to="/addNewPost">
+                      <Button
+                        variant="contained"
+                        startIcon={<UpdateIcon />}
+                        onClick={() => onUpdateHandler(result)}
+                      >
+                        Update
+                      </Button>
+                    </Link>
+
                     <Button variant="outlined" startIcon={<DeleteIcon />}>
                       Delete
                     </Button>
