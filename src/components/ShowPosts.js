@@ -39,6 +39,19 @@ function ShowPosts() {
     setUpdatedData(item);
   };
 
+  const onDeleteHandler = (item) => {
+    console.log("Delete item", item);
+    fetch(`http://localhost:8080/socialmedia/${item.id}`, {
+      method: "DELETE",
+    }).then(() => {
+      console.log("Post delete");
+    });
+
+    setTimeout(() => {
+      window.location.reload();
+    }, 3000);
+  };
+
   return (
     <ShowpostContainer title="Show Posts">
       <div
@@ -112,7 +125,11 @@ function ShowPosts() {
                       </Button>
                     </Link>
 
-                    <Button variant="outlined" startIcon={<DeleteIcon />}>
+                    <Button
+                      variant="outlined"
+                      startIcon={<DeleteIcon />}
+                      onClick={() => onDeleteHandler(result)}
+                    >
                       Delete
                     </Button>
                   </div>
